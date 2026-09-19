@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Social Media Tool</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <h1>Social Media Tool</h1>
+      <p>Satu tempat untuk menyiapkan konten media sosial.</p>
+    </div>
+    <span class="status">Prototype</span>
+  </header>
+
+  <main class="container">
+    <section class="card">
+      <h2>1. Pilih platform</h2>
+      <div class="platforms">
+        <button class="platform active" data-platform="Instagram">Instagram</button>
+        <button class="platform" data-platform="Facebook">Facebook</button>
+        <button class="platform" data-platform="TikTok">TikTok</button>
+        <button class="platform" data-platform="YouTube">YouTube</button>
+      </div>
+      <p id="selectedPlatform">Platform dipilih: Instagram</p>
+    </section>
+
+    <section class="card">
+      <h2>2. Buat konten</h2>
+      <label for="caption">Caption</label>
+      <textarea id="caption" rows="7" placeholder="Tulis caption kamu di sini..."></textarea>
+
+      <label for="media">Pilih gambar/video</label>
+      <input id="media" type="file" accept="image/*,video/*">
+
+      <button id="prepareButton" class="primary">Siapkan Postingan</button>
+      <p id="message" class="message"></p>
+    </section>
+
+    <section class="card">
+      <h2>3. Status</h2>
+      <div class="status-box">
+        <strong>Belum terhubung ke platform</strong>
+        <span>Langkah berikutnya: membuat koneksi API secara aman.</span>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Social Media Tool • Dibuat bertahap dari Android</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
