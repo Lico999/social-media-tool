@@ -30,3 +30,27 @@ draftList.addEventListener("click",e=>{const b=e.target.closest("button");if(!b)
 clearDraftsButton.addEventListener("click",()=>{if(!getDrafts().length)return;localStorage.removeItem(DRAFT_KEY);renderDrafts();message.textContent="Semua draft dihapus."});
 prepareButton.addEventListener("click",()=>{if(!caption.value.trim()&&!media.files.length){message.textContent="Isi caption atau tambahkan media terlebih dahulu.";return}message.textContent="✓ Postingan "+currentPlatform+" sudah disiapkan. Pengiriman asli belum aktif."});
 renderDrafts();
+const seoAudience=document.getElementById("seoAudience"),seoTone=document.getElementById("seoTone"),smartSeoButton=document.getElementById("smartSeoButton"),copySeoButton=document.getElementById("copySeoButton"),smartSeoResult=document.getElementById("smartSeoResult");
+function smartSEO(){
+  const base=(topic.value.trim()||makeKeywords().slice(0,3).join(" ")).trim();
+  const audience=seoAudience.value.trim()||"audiens yang tertarik dengan topik ini";
+  if(!base&&!caption.value.trim()){smartSeoResult.innerHTML='<div class="seo-empty">Isi caption atau topik terlebih dahulu.</div>';return}
+  const kws=makeKeywords().slice(0,8); const main=(topic.value.trim()||kws[0]||"konten").trim();
+  const titleBase=main.charAt(0).toUpperCase()+main.slice(1);
+  const hooks={
+    natural:"Sedikit cerita tentang "+main+" yang mungkin kamu butuhkan.",
+    friendly:"Kalau kamu suka "+main+", ini wajib kamu simak!",
+    professional:"Panduan singkat dan praktis tentang "+main+".",
+    viral:"STOP scroll! Ini yang perlu kamu tahu tentang "+main+" 🔥"
+  };
+  const hook=hooks[seoTone.value]||hooks.natural;
+  const cta=seoTone.value==="professional"?"Simpan postingan ini dan bagikan kepada orang yang membutuhkannya.":seoTone.value==="viral"?"Tag temanmu yang wajib lihat ini! 👇":"Setuju? Tulis pendapatmu di komentar 👇";
+  const description="Konten tentang "+main+" untuk "+audience+". "+(caption.value.trim()?caption.value.trim().slice(0,180):"Temukan poin penting dan inspirasi yang bisa kamu gunakan.");
+  const tags=buildTags();
+  const title=titleBase+" | "+(kws.slice(0,2).join(" & ")||"Tips");
+  const all="HOOK: "+hook+"\n\nJUDUL: "+title+"\n\nDESKRIPSI: "+description+"\n\nKEYWORD: "+kws.join(", ")+"\n\nHASHTAG: "+tags.map(t=>"#"+t).join(" ")+"\n\nCTA: "+cta;
+  smartSeoResult.innerHTML='<div class="smart-block"><span class="smart-label">HOOK</span><p>'+escapeHtml(hook)+'</p></div><div class="smart-block"><span class="smart-label">SEO TITLE</span><p>'+escapeHtml(title)+'</p></div><div class="smart-block"><span class="smart-label">SEO DESCRIPTION</span><p>'+escapeHtml(description)+'</p></div><div class="smart-block"><span class="smart-label">KEYWORDS</span><p>'+kws.map(escapeHtml).join(" • ")+'</p></div><div class="smart-block"><span class="smart-label">HASHTAGS</span><div class="tag-cloud">'+tags.map(t=>"<span>#"+escapeHtml(t)+"</span>").join("")+'</div></div><div class="smart-block"><span class="smart-label">CTA</span><p>'+escapeHtml(cta)+'</p></div><div class="seo-note">Generator ini berjalan di browser tanpa API. Hasilnya adalah saran berbasis teks, bukan jaminan ranking atau viral.</div>';
+  window.currentSEOText=all;
+}
+smartSeoButton.addEventListener("click",smartSEO);
+copySeoButton.addEventListener("click",async()=>{if(!window.currentSEOText)smartSEO();if(!window.currentSEOText)return;try{await navigator.clipboard.writeText(window.currentSEOText);message.textContent="✓ Paket SEO berhasil disalin."}catch{message.textContent="Paket SEO sudah dibuat; salin manual dari hasil."}});
