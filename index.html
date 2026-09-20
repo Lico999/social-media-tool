@@ -1,73 +1,46 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#0f172a">
-  <title>Social Media Tool</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="theme-color" content="#0f172a">
+<title>Social Media Tool</title><link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header class="topbar">
-    <div class="brand"><div class="brand-mark">S</div><div><h1>Social Media Tool</h1><p>Kelola konten dari satu tempat</p></div></div>
-    <span class="status"><span class="dot"></span> Prototype</span>
-  </header>
+<header class="topbar"><div class="brand"><div class="brand-mark">S</div><div><h1>Social Media Tool</h1><p>Kelola konten dari satu tempat</p></div></div><span class="status"><span class="dot"></span> Prototype</span></header>
+<main class="container">
+<section class="welcome"><div><span class="eyebrow">DASHBOARD</span><h2>Siapkan postingan kamu ✨</h2><p>Pilih platform, tulis caption, tambahkan media, lalu optimalkan kata kunci dan tag.</p></div><div class="welcome-icon">✦</div></section>
+<section class="stats">
+<div class="stat-card"><span class="stat-icon">◉</span><div><strong id="draftCount">0</strong><small>Draft tersimpan</small></div></div>
+<div class="stat-card"><span class="stat-icon">#</span><div><strong id="tagCount">0</strong><small>Tag dibuat</small></div></div>
+<div class="stat-card"><span class="stat-icon">○</span><div><strong>0</strong><small>Akun terhubung</small></div></div>
+</section>
+<section class="card"><div class="section-heading"><div><span class="step">01</span><div><h3>Pilih platform</h3><p>Rekomendasi tag akan menyesuaikan platform.</p></div></div></div>
+<div class="platforms">
+<button class="platform active" data-platform="Instagram"><span class="platform-icon instagram">◎</span><span><b>Instagram</b><small>Foto & Reels</small></span><span class="check">✓</span></button>
+<button class="platform" data-platform="Facebook"><span class="platform-icon facebook">f</span><span><b>Facebook</b><small>Post & Video</small></span><span class="check">✓</span></button>
+<button class="platform" data-platform="TikTok"><span class="platform-icon tiktok">♪</span><span><b>TikTok</b><small>Video pendek</small></span><span class="check">✓</span></button>
+<button class="platform" data-platform="YouTube"><span class="platform-icon youtube">▶</span><span><b>YouTube</b><small>Video</small></span><span class="check">✓</span></button>
+</div><div class="selected-line">Platform aktif: <strong id="selectedPlatform">Instagram</strong></div></section>
 
-  <main class="container">
-    <section class="welcome"><div><span class="eyebrow">DASHBOARD</span><h2>Siapkan postingan kamu ✨</h2><p>Pilih platform, tulis caption, tambahkan media, lalu lihat preview sebelum diposting.</p></div><div class="welcome-icon">✦</div></section>
+<section class="workspace">
+<section class="card composer"><div class="section-heading"><div><span class="step">02</span><div><h3>Buat konten</h3><p>Tulis pesan dan tambahkan media.</p></div></div></div>
+<label for="caption">Caption</label><textarea id="caption" rows="7" maxlength="2200" placeholder="Apa yang ingin kamu bagikan hari ini?"></textarea>
+<div class="field-footer"><span>Draft tersimpan di perangkat ini.</span><span id="charCount">0 / 2200</span></div>
+<label for="media">Media</label><label class="upload" for="media"><span class="upload-icon">＋</span><span><b>Tambahkan foto atau video</b><small>JPG, PNG, MP4, dan format umum lainnya</small></span><span class="upload-button">Pilih file</span></label>
+<input id="media" type="file" accept="image/*,video/*" hidden><div id="mediaInfo" class="media-info hidden"></div>
+<div class="action-row"><button id="saveDraftButton" class="secondary">Simpan Draft</button><button id="prepareButton" class="primary">Siapkan Postingan <span>→</span></button></div><p id="message" class="message"></p></section>
 
-    <section class="stats">
-      <div class="stat-card"><span class="stat-icon">◉</span><div><strong id="draftCount">0</strong><small>Draft tersimpan</small></div></div>
-      <div class="stat-card"><span class="stat-icon">◌</span><div><strong>0</strong><small>Terjadwal</small></div></div>
-      <div class="stat-card"><span class="stat-icon">○</span><div><strong>0</strong><small>Akun terhubung</small></div></div>
-    </section>
+<section class="card preview-card"><div class="section-heading"><div><span class="step">03</span><div><h3>Preview</h3><p>Lihat gambaran konten kamu.</p></div></div></div>
+<div class="preview"><div class="preview-head"><div class="avatar">S</div><div><b id="previewPlatform">Instagram</b><small>Preview postingan</small></div><span>•••</span></div><div id="previewMedia" class="preview-media"><span>Belum ada media</span></div><div class="preview-body"><div class="preview-actions">♡ &nbsp; ◯ &nbsp; ↗</div><p id="previewCaption">Caption kamu akan muncul di sini...</p></div></div></section>
+</section>
 
-    <section class="card">
-      <div class="section-heading"><div><span class="step">01</span><div><h3>Pilih platform</h3><p>Postingan akan disiapkan untuk platform yang dipilih.</p></div></div></div>
-      <div class="platforms">
-        <button class="platform active" data-platform="Instagram"><span class="platform-icon instagram">◎</span><span><b>Instagram</b><small>Foto & Reels</small></span><span class="check">✓</span></button>
-        <button class="platform" data-platform="Facebook"><span class="platform-icon facebook">f</span><span><b>Facebook</b><small>Post & Video</small></span><span class="check">✓</span></button>
-        <button class="platform" data-platform="TikTok"><span class="platform-icon tiktok">♪</span><span><b>TikTok</b><small>Video pendek</small></span><span class="check">✓</span></button>
-        <button class="platform" data-platform="YouTube"><span class="platform-icon youtube">▶</span><span><b>YouTube</b><small>Video</small></span><span class="check">✓</span></button>
-      </div>
-      <div class="selected-line">Platform aktif: <strong id="selectedPlatform">Instagram</strong></div>
-    </section>
+<section class="card seo-card"><div class="section-heading"><div><span class="step">04</span><div><h3>Auto Tag & SEO</h3><p>Generate kata kunci dan hashtag dari caption secara otomatis.</p></div></div><span class="seo-badge">OFFLINE • GRATIS</span></div>
+<div class="seo-grid"><div><label for="topic">Topik utama <span class="optional">(opsional)</span></label><input id="topic" class="text-input" placeholder="Contoh: kopi, kuliner Jakarta, skincare..."><p class="hint">Isi jika caption belum menyebut topik utama.</p></div><div><label for="tagCountInput">Jumlah hashtag</label><select id="tagCountInput" class="text-input"><option value="5">5 tag</option><option value="8" selected>8 tag</option><option value="12">12 tag</option><option value="15">15 tag</option></select></div></div>
+<div class="seo-actions"><button id="generateSeoButton" class="primary">⚡ Generate Auto Tag & SEO</button><button id="copyTagsButton" class="secondary">Salin Hashtag</button></div>
+<div id="seoResult" class="seo-result"><div class="seo-empty">Belum ada tag. Tulis caption lalu tekan <b>Generate Auto Tag & SEO</b>.</div></div></section>
 
-    <section class="workspace">
-      <section class="card composer">
-        <div class="section-heading"><div><span class="step">02</span><div><h3>Buat konten</h3><p>Tulis pesan dan tambahkan media.</p></div></div></div>
-        <label for="caption">Caption</label>
-        <textarea id="caption" rows="7" maxlength="2200" placeholder="Apa yang ingin kamu bagikan hari ini?"></textarea>
-        <div class="field-footer"><span>Draft tersimpan di perangkat ini.</span><span id="charCount">0 / 2200</span></div>
-
-        <label for="media">Media</label>
-        <label class="upload" for="media"><span class="upload-icon">＋</span><span><b>Tambahkan foto atau video</b><small>JPG, PNG, MP4, dan format umum lainnya</small></span><span class="upload-button">Pilih file</span></label>
-        <input id="media" type="file" accept="image/*,video/*" hidden>
-        <div id="mediaInfo" class="media-info hidden"></div>
-
-        <div class="action-row"><button id="saveDraftButton" class="secondary">Simpan Draft</button><button id="prepareButton" class="primary">Siapkan Postingan <span>→</span></button></div>
-        <p id="message" class="message"></p>
-      </section>
-
-      <section class="card preview-card">
-        <div class="section-heading"><div><span class="step">03</span><div><h3>Preview</h3><p>Lihat gambaran konten kamu.</p></div></div></div>
-        <div class="preview">
-          <div class="preview-head"><div class="avatar">S</div><div><b id="previewPlatform">Instagram</b><small>Preview postingan</small></div><span>•••</span></div>
-          <div id="previewMedia" class="preview-media"><span>Belum ada media</span></div>
-          <div class="preview-body"><div class="preview-actions">♡ &nbsp; ◯ &nbsp; ↗</div><p id="previewCaption">Caption kamu akan muncul di sini...</p></div>
-        </div>
-      </section>
-    </section>
-
-    <section class="card drafts">
-      <div class="section-heading"><div><span class="step">04</span><div><h3>Draft tersimpan</h3><p>Draft disimpan di browser Android ini.</p></div></div><button id="clearDraftsButton" class="text-button">Hapus semua</button></div>
-      <div id="draftList" class="draft-list"><div class="empty-drafts">Belum ada draft. Tekan <b>Simpan Draft</b> setelah membuat konten.</div></div>
-    </section>
-
-    <section class="card connection"><div><span class="connection-icon">🔗</span><div><h3>Koneksi platform</h3><p>Belum ada akun media sosial yang terhubung.</p></div></div><span class="coming-soon">Segera hadir</span></section>
-  </main>
-
-  <footer><p>Social Media Tool <span>•</span> Dibuat bertahap dari Android</p></footer>
-  <script src="script.js"></script>
-</body>
-</html>
+<section class="card drafts"><div class="section-heading"><div><span class="step">05</span><div><h3>Draft tersimpan</h3><p>Draft disimpan di browser Android ini.</p></div></div><button id="clearDraftsButton" class="text-button">Hapus semua</button></div><div id="draftList" class="draft-list"><div class="empty-drafts">Belum ada draft.</div></div></section>
+<section class="card connection"><div><span class="connection-icon">🔗</span><div><h3>Koneksi platform</h3><p>Belum ada akun media sosial yang terhubung.</p></div></div><span class="coming-soon">Segera hadir</span></section>
+</main>
+<footer><p>Social Media Tool <span>•</span> Dibuat bertahap dari Android</p></footer>
+<script src="script.js"></script>
+</body></html>
